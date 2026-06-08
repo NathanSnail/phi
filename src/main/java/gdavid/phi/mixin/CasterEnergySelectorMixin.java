@@ -11,12 +11,12 @@ import vazkii.psi.api.spell.SpellContext;
 @Pseudo
 @Mixin(targets = "vazkii.psi.common.spell.selector.entity.PieceSelectorCasterEnergy", remap = false)
 public class CasterEnergySelectorMixin {
-	
-	@Inject(method = "execute", at = @At("HEAD"), cancellable = true)
-	private void execute(SpellContext context, CallbackInfoReturnable<Object> callback) {
-		if (context.caster instanceof MPUCaster) {
-			callback.setReturnValue(((MPUCaster) context.caster).getPsi());
-		}
-	}
-	
+
+    @Inject(method = "execute", at = @At("HEAD"), cancellable = true)
+    private void execute(SpellContext context, CallbackInfoReturnable<Object> callback) {
+        if (context.caster instanceof MPUCaster) {
+            callback.setReturnValue(((MPUCaster) context.caster).getPsi());
+        }
+    }
+
 }

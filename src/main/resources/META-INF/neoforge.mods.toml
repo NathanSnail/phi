@@ -1,36 +1,36 @@
-modLoader="javafml"
-loaderVersion="[4,)"
-license="GNU LGPLv3"
-logoFile="logo.png"
-displayURL="https://github.com/gdavid04/Phi"
-authors="GDavid"
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "GNU LGPLv3"
+logoFile = "logo.png"
+displayURL = "https://github.com/gdavid04/Phi"
+authors = "GDavid"
 
 [[mods]]
-modId="phi"
-version="${file.jarVersion}"
-displayName="Phi"
-description='''
+modId = "phi"
+version = "${file.jarVersion}"
+displayName = "Phi"
+description = '''
 A Psi addon
 '''
 
 [[mixins]]
-config="phi.mixins.json"
+config = "phi.mixins.json"
 
 [[dependencies.phi]]
-    modId="neoforge"
-    type="required"
-    versionRange="[21.1,)"
-    ordering="NONE"
-    side="BOTH"
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.phi]]
-    modId="minecraft"
-    type="required"
-    versionRange="[1.21.1,1.22)"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies.phi]]
-    modId="psi"
-    type="required"
-    versionRange="[1.21,)"
-    ordering="AFTER"
-    side="BOTH"
+modId = "psi"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "AFTER"
+side = "BOTH"

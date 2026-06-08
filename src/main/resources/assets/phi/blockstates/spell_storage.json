@@ -1,5 +1,7 @@
 {
-	"variants": {
-		"": { "model": "phi:block/spell_storage" }
-	}
+  "variants": {
+    "": {
+      "model": "phi:block/spell_storage"
+    }
+  }
 }

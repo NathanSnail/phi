@@ -6,11 +6,11 @@ import net.minecraftforge.network.NetworkEvent.Context;
 import java.util.function.Supplier;
 
 public interface Message {
-	
-	// constructor(PacketBuffer buf);
-	
-	void encode(FriendlyByteBuf buf);
-	
-	boolean receive(Supplier<Context> context);
-	
+
+    // constructor(PacketBuffer buf);
+
+    void encode(FriendlyByteBuf buf);
+
+    boolean receive(Supplier<Context> context);
+
 }

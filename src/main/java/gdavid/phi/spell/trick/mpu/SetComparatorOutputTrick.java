@@ -5,49 +5,43 @@ import gdavid.phi.spell.Errors;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vazkii.psi.api.spell.EnumSpellStat;
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellCompilationException;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellMetadata;
-import vazkii.psi.api.spell.SpellParam;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
 import java.util.List;
 
 public class SetComparatorOutputTrick extends PieceTrick {
-	
-	SpellParam<Number> num;
-	
-	public SetComparatorOutputTrick(Spell spell) {
-		super(spell);
-	}
-	
-	@Override
-	public void initParams() {
-		addParam(num = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.BLUE, false, false));
-	}
-	
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void addToTooltipAfterShift(List<Component> tooltip) {
-		tooltip.add(Component.translatable("phi.tooltip.require_mpu"));
-		super.addToTooltipAfterShift(tooltip);
-	}
-	
-	@Override
-	public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-		meta.addStat(EnumSpellStat.COMPLEXITY, 1);
-		meta.addStat(EnumSpellStat.POTENCY, 5);
-	}
-	
-	@Override
-	public Object execute(SpellContext context) throws SpellRuntimeException {
-		if (!(context.caster instanceof MPUCaster)) Errors.noMpu.runtime();
-		((MPUCaster) context.caster).setComparatorSignal(getNonnullParamValue(context, num).intValue());
-		return null;
-	}
-	
+
+    SpellParam<Number> num;
+
+    public SetComparatorOutputTrick(Spell spell) {
+        super(spell);
+    }
+
+    @Override
+    public void initParams() {
+        addParam(num = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.BLUE, false, false));
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void addToTooltipAfterShift(List<Component> tooltip) {
+        tooltip.add(Component.translatable("phi.tooltip.require_mpu"));
+        super.addToTooltipAfterShift(tooltip);
+    }
+
+    @Override
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        meta.addStat(EnumSpellStat.COMPLEXITY, 1);
+        meta.addStat(EnumSpellStat.POTENCY, 5);
+    }
+
+    @Override
+    public Object execute(SpellContext context) throws SpellRuntimeException {
+        if (!(context.caster instanceof MPUCaster)) Errors.noMpu.runtime();
+        ((MPUCaster) context.caster).setComparatorSignal(getNonnullParamValue(context, num).intValue());
+        return null;
+    }
+
 }

@@ -7,24 +7,24 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 
 public class SpellNameSelector extends PieceSelector {
-	
-	public SpellNameSelector(Spell spell) {
-		super(spell);
-	}
-	
-	@Override
-	public EnumPieceType getPieceType() {
-		return EnumPieceType.CONSTANT;
-	}
-	
-	@Override
-	public Object execute(SpellContext context) throws SpellRuntimeException {
-		return spell.name;
-	}
-	
-	@Override
-	public Class<?> getEvaluationType() {
-		return String.class;
-	}
-	
+
+    public SpellNameSelector(Spell spell) {
+        super(spell);
+    }
+
+    @Override
+    public EnumPieceType getPieceType() {
+        return EnumPieceType.CONSTANT;
+    }
+
+    @Override
+    public Object execute(SpellContext context) throws SpellRuntimeException {
+        return spell.name;
+    }
+
+    @Override
+    public Class<?> getEvaluationType() {
+        return String.class;
+    }
+
 }

@@ -9,26 +9,26 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
 public class TextLengthOperator extends PieceOperator {
-	
-	SpellParam<String> text;
-	
-	public TextLengthOperator(Spell spell) {
-		super(spell);
-	}
-	
-	@Override
-	public void initParams() {
-		addParam(text = new TextParam(Param.text.name, SpellParam.BLUE, false, false));
-	}
-	
-	@Override
-	public Class<?> getEvaluationType() {
-		return Double.class;
-	}
-	
-	@Override
-	public Object execute(SpellContext context) throws SpellRuntimeException {
-		return getParamValue(context, text).length();
-	}
-	
+
+    SpellParam<String> text;
+
+    public TextLengthOperator(Spell spell) {
+        super(spell);
+    }
+
+    @Override
+    public void initParams() {
+        addParam(text = new TextParam(Param.text.name, SpellParam.BLUE, false, false));
+    }
+
+    @Override
+    public Class<?> getEvaluationType() {
+        return Double.class;
+    }
+
+    @Override
+    public Object execute(SpellContext context) throws SpellRuntimeException {
+        return getParamValue(context, text).length();
+    }
+
 }

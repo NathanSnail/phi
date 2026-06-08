@@ -1,15 +1,19 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"IPI",
-		"I I",
-		" I "
-	],
-	"key": {
-		"I": { "tag": "forge:ingots/iron" },
-		"P": { "tag": "forge:ingots/psimetal" }
-	},
-	"result": {
-		"item": "phi:cad_holder"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "I I",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "tag": "forge:ingots/psimetal"
+    }
+  },
+  "result": {
+    "item": "phi:cad_holder"
+  }
 }

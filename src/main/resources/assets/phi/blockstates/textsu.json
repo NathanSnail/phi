@@ -1,5 +1,7 @@
 {
-	"variants": {
-		"": { "model": "phi:block/textsu" }
-	}
+  "variants": {
+    "": {
+      "model": "phi:block/textsu"
+    }
+  }
 }

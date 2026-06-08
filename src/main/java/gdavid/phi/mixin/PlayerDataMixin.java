@@ -1,7 +1,6 @@
 package gdavid.phi.mixin;
 
 import gdavid.phi.block.tile.MPUTile.MPUCaster;
-import java.lang.ref.WeakReference;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,44 +10,46 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.lang.ref.WeakReference;
+
 @Pseudo
 @Mixin(targets = "vazkii.psi.common.core.handler.PlayerDataHandler$PlayerData", remap = false)
 public class PlayerDataMixin {
-	
-	@Final
-	public WeakReference<Player> playerWR;
-	
-	@Inject(method = "deductPsi(IIZZ)V", at = @At("HEAD"), cancellable = true)
-	private void deductPsi(int psi, int cd, boolean sync, boolean shatter, CallbackInfo callback) {
-		Player player = playerWR.get();
-		if (player instanceof MPUCaster) {
-			((MPUCaster) player).deductPsi(psi, cd);
-			callback.cancel();
-		}
-	}
-	
-	@Inject(method = "getAvailablePsi", at = @At("HEAD"), cancellable = true)
-	private void getAvailablePsi(CallbackInfoReturnable<Integer> callback) {
-		Player player = playerWR.get();
-		if (player instanceof MPUCaster) {
-			callback.setReturnValue(((MPUCaster) player).getPsi());
-		}
-	}
-	
-	@Inject(method = "getLastAvailablePsi", at = @At("HEAD"), cancellable = true)
-	private void getLastAvailablePsi(CallbackInfoReturnable<Integer> callback) {
-		Player player = playerWR.get();
-		if (player instanceof MPUCaster) {
-			callback.setReturnValue(((MPUCaster) player).getPsi());
-		}
-	}
-	
-	@Inject(method = "getTotalPsi", at = @At("HEAD"), cancellable = true)
-	private void getTotalPsi(CallbackInfoReturnable<Integer> callback) {
-		Player player = playerWR.get();
-		if (player instanceof MPUCaster) {
-			callback.setReturnValue(((MPUCaster) player).getMaxPsi());
-		}
-	}
-	
+
+    @Final
+    public WeakReference<Player> playerWR;
+
+    @Inject(method = "deductPsi(IIZZ)V", at = @At("HEAD"), cancellable = true)
+    private void deductPsi(int psi, int cd, boolean sync, boolean shatter, CallbackInfo callback) {
+        Player player = playerWR.get();
+        if (player instanceof MPUCaster) {
+            ((MPUCaster) player).deductPsi(psi, cd);
+            callback.cancel();
+        }
+    }
+
+    @Inject(method = "getAvailablePsi", at = @At("HEAD"), cancellable = true)
+    private void getAvailablePsi(CallbackInfoReturnable<Integer> callback) {
+        Player player = playerWR.get();
+        if (player instanceof MPUCaster) {
+            callback.setReturnValue(((MPUCaster) player).getPsi());
+        }
+    }
+
+    @Inject(method = "getLastAvailablePsi", at = @At("HEAD"), cancellable = true)
+    private void getLastAvailablePsi(CallbackInfoReturnable<Integer> callback) {
+        Player player = playerWR.get();
+        if (player instanceof MPUCaster) {
+            callback.setReturnValue(((MPUCaster) player).getPsi());
+        }
+    }
+
+    @Inject(method = "getTotalPsi", at = @At("HEAD"), cancellable = true)
+    private void getTotalPsi(CallbackInfoReturnable<Integer> callback) {
+        Player player = playerWR.get();
+        if (player instanceof MPUCaster) {
+            callback.setReturnValue(((MPUCaster) player).getMaxPsi());
+        }
+    }
+
 }

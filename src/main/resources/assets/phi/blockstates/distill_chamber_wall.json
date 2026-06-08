@@ -1,5 +1,7 @@
 {
-	"variants": {
-		"": { "model": "phi:block/distill_chamber_wall" }
-	}
+  "variants": {
+    "": {
+      "model": "phi:block/distill_chamber_wall"
+    }
+  }
 }

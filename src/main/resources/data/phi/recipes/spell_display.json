@@ -1,9 +1,11 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{ "item": "psi:programmer" }
-	],
-	"result": {
-		"item": "phi:spell_display"
-	}
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "psi:programmer"
+    }
+  ],
+  "result": {
+    "item": "phi:spell_display"
+  }
 }

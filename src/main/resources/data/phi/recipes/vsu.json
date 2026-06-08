@@ -1,16 +1,22 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"IPI",
-		"IRI",
-		"III"
-	],
-	"key": {
-		"I": { "tag": "forge:ingots/iron" },
-		"P": { "tag": "forge:ingots/psimetal" },
-		"R": { "item": "psi:vector_ruler" }
-	},
-	"result": {
-		"item": "phi:vsu"
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "IRI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "tag": "forge:ingots/psimetal"
+    },
+    "R": {
+      "item": "psi:vector_ruler"
+    }
+  },
+  "result": {
+    "item": "phi:vsu"
+  }
 }

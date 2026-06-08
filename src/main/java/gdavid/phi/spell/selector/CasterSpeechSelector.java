@@ -1,6 +1,5 @@
 package gdavid.phi.spell.selector;
 
-import java.util.WeakHashMap;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -10,28 +9,30 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 
+import java.util.WeakHashMap;
+
 @EventBusSubscriber
 public class CasterSpeechSelector extends PieceSelector {
-	
-	private static WeakHashMap<Player, String> lastSaid = new WeakHashMap<>();
-	
-	public CasterSpeechSelector(Spell spell) {
-		super(spell);
-	}
-	
-	@Override
-	public Object execute(SpellContext context) throws SpellRuntimeException {
-		return lastSaid.getOrDefault(context.caster, "");
-	}
-	
-	@Override
-	public Class<?> getEvaluationType() {
-		return String.class;
-	}
-	
-	@SubscribeEvent
-	public static void speech(ServerChatEvent.Submitted event) {
-		lastSaid.put(event.getPlayer(), event.getRawText());
-	}
-	
+
+    private static WeakHashMap<Player, String> lastSaid = new WeakHashMap<>();
+
+    public CasterSpeechSelector(Spell spell) {
+        super(spell);
+    }
+
+    @SubscribeEvent
+    public static void speech(ServerChatEvent.Submitted event) {
+        lastSaid.put(event.getPlayer(), event.getRawText());
+    }
+
+    @Override
+    public Object execute(SpellContext context) throws SpellRuntimeException {
+        return lastSaid.getOrDefault(context.caster, "");
+    }
+
+    @Override
+    public Class<?> getEvaluationType() {
+        return String.class;
+    }
+
 }

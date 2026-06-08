@@ -1,16 +1,16 @@
 {
-	"required": true,
-	"package": "gdavid.phi.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"SpellPieceMixin",
-		"SpellCompilerMixin",
-		"PlayerDataMixin",
-		"CasterEnergySelectorMixin",
-		"SuccessCounterSelectorMixin",
-		"CompiledSpellMixin",
-		"SpellGridMixin",
-		"ProgrammerGuiMixin"
-	],
-	"minVersion": "0.8.3"
+  "required": true,
+  "package": "gdavid.phi.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CasterEnergySelectorMixin",
+    "CompiledSpellMixin",
+    "PlayerDataMixin",
+    "ProgrammerGuiMixin",
+    "SpellCompilerMixin",
+    "SpellGridMixin",
+    "SpellPieceMixin",
+    "SuccessCounterSelectorMixin"
+  ],
+  "minVersion": "0.8.3"
 }

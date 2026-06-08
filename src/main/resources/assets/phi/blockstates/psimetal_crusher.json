@@ -1,5 +1,7 @@
 {
-	"variants": {
-		"": { "model": "phi:block/psimetal_crusher" }
-	}
+  "variants": {
+    "": {
+      "model": "phi:block/psimetal_crusher"
+    }
+  }
 }
