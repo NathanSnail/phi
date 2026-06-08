@@ -1,112 +1,87 @@
-buildscript {
-	repositories {
-		maven { url = 'https://files.minecraftforge.net/maven' }
-		maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-		mavenCentral()
-		maven { url = 'https://maven.parchmentmc.org' }
-	}
-	dependencies {
-		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
-		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-		classpath 'org.parchmentmc:librarian:1.+'
-	}
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.36'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
-
-// version in gradle.properties
+version = mod_version
 group = 'gdavid.phi'
-archivesBaseName = 'phi'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-minecraft {
-	mappings channel: "parchment", version: "2022.11.27-1.19.2"
-	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-	runs {
-		client {
-			workingDirectory project.file('run')
-			property 'forge.logging.console.level', 'debug'
-			property 'mixin.env.remapRefMap', 'true'
-			property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-			arg "-mixin.config=phi.mixins.json"
-			mods {
-				phi { source sourceSets.main }
-			}
-		}
-		server {
-			workingDirectory project.file('run')
-			property 'forge.logging.console.level', 'debug'
-			property 'mixin.env.remapRefMap', 'true'
-			property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-			mods {
-				phi { source sourceSets.main }
-			}
-		}
-		data {
-			workingDirectory project.file('run')
-			property 'forge.logging.console.level', 'debug'
-			args '--mod', 'phi', '--all',
-				'--output', file('src/generated/resources/'),
-				'--existing', file('src/main/resources/')
-			mods {
-				phi { source sourceSets.main }
-			}
-		}
-	}
+base {
+    archivesName = 'phi'
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+// Minecraft 1.21.1 requires Java 21
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// Access transformers
+minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
 
 repositories {
-	maven { url "https://maven.blamejared.com/" }
+    maven { url = "https://maven.blamejared.com/" }
 }
 
 dependencies {
-	minecraft group: 'net.minecraftforge', name: 'forge', version: "1.19.2-43.3.0"
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation "net.neoforged:neoforge:${neo_version}"
 
-	compileOnly fg.deobf("vazkii.psi:Psi:${psi_version}")
-	runtimeOnly fg.deobf("vazkii.psi:Psi:${psi_version}")
+    compileOnly "vazkii.psi:psi:${psi_version}"
+    runtimeOnly "vazkii.psi:psi:${psi_version}"
 
-	runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
+    runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
 }
 
-mixin {
-	add sourceSets.main, "phi.refmap.json"
+// Run configurations
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        workingDirectory project.file('run')
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+    }
+
+    server {
+        argument '--nogui'
+    }
+
+    data {
+        arguments.addAll '--mod', 'phi', '--all',
+                '--output', file('src/generated/resources/').getAbsolutePath(),
+                '--existing', file('src/main/resources/').getAbsolutePath()
+    }
 }
 
 jar {
-	manifest {
-		attributes([
-			"Specification-Title": "phi",
-			"Specification-Vendor": "gdavid",
-			"Specification-Version": "1",
-			"Implementation-Title": project.name,
-			"Implementation-Version": "${version}",
-			"Implementation-Vendor" :"gdavid",
-			"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-			"MixinConfigs": "phi.mixins.json"
-		])
-	}
+    manifest {
+        attributes([
+                "Specification-Title"     : "phi",
+                "Specification-Vendor"    : "gdavid",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${version}",
+                "Implementation-Vendor"   : "gdavid",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
 
-build.dependsOn('reobfJar')
-
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			artifact jar
-		}
-	}
-	repositories {
-		maven {
-			url "file:///${project.projectDir}/mcmodsrepo"
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
 }

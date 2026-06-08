@@ -1,8 +1,7 @@
 {
 	"required": true,
 	"package": "gdavid.phi.mixin",
-	"compatibilityLevel": "JAVA_17",
-	"refmap": "phi.refmap.json",
+	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"SpellPieceMixin",
 		"SpellCompilerMixin",
